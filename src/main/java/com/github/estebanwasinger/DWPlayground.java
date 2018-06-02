@@ -22,12 +22,20 @@ import static com.github.estebanwasinger.DWPlaygroundUtils.getInputDataType;
 import static com.github.estebanwasinger.DWPlaygroundUtils.getTypedValueStringValue;
 import static com.github.estebanwasinger.DWPlaygroundUtils.updateAppTitle;
 import static javafx.scene.layout.Priority.ALWAYS;
+
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
-import org.mule.runtime.core.el.DefaultBindingContextBuilder;
-import org.mule.runtime.core.util.IOUtils;
-import com.mulesoft.weave.el.WeaveExpressionLanguage;
+import org.mule.runtime.core.internal.el.DefaultBindingContextBuilder;
+import org.mule.weave.v2.el.WeaveExpressionLanguage;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -56,14 +64,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.function.Supplier;
+import org.apache.commons.io.IOUtils;
 
 /**
  * weave-playground

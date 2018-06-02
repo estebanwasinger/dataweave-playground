@@ -1,15 +1,16 @@
 package com.github.estebanwasinger;
 
 import static com.github.estebanwasinger.DWPlaygroundConstants.DATA_WEAVE_PLAYGROUND_APP_TITLE;
+
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.streaming.CursorProvider;
-import org.mule.runtime.core.util.IOUtils;
-
-import javafx.stage.Stage;
+import org.mule.runtime.core.api.util.IOUtils;
 
 import java.io.InputStream;
+
+import javafx.stage.Stage;
 
 /**
  * weave-playground

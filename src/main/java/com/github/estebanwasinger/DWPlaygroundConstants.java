@@ -25,7 +25,7 @@ public class DWPlaygroundConstants {
     public static final String DWP_EXT_UPPER = "*.DWP";
 
     public static final String BASE_TRANS = "%dw 2.0\n" +
-            "%output application/json\n" +
+            "output application/json\n" +
             "---\n" +
             "payload";
     public static final String EXAMPLE = "{\n" +
@@ -43,7 +43,7 @@ public class DWPlaygroundConstants {
             "}";
 
     public static final String LOAD_DW = "%dw 2.0\n" +
-            "%output application/java\n" +
+            "output application/java\n" +
             "---\n" +
             "payload";
     public static final String PAYLOAD = "payload";
