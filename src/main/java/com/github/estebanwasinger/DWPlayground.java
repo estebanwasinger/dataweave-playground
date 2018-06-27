@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -101,7 +103,18 @@ public class DWPlayground extends Application {
         comboBox.setEditable(true);
         comboBox.setValue(APPLICATION_JSON);
         comboBox.editorProperty().get().setFont(MENLO_FONT);
-        inputVBox.getChildren().add(new ToolBar(comboBox));
+
+        inputVBox.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                comboBox.setPrefWidth(Double.valueOf(newValue.toString()) - 20);
+            }
+        });
+
+        ToolBar toolBar = new ToolBar(comboBox);
+
+
+        inputVBox.getChildren().add(toolBar);
         Tab payloadTab = new Tab(PAYLOAD, inputVBox);
         TabPane tabPane = new TabPane(payloadTab);
         configureTextArea(tabPane);
