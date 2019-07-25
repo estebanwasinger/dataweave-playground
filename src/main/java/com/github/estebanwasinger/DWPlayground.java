@@ -79,7 +79,7 @@ public class DWPlayground extends Application {
 
     public static final Font MENLO_FONT = new Font("Menlo", 14);
     private WeaveExpressionLanguage weaveEngine;
-    private Stage primaryStage;
+    private static Stage primaryStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -89,13 +89,7 @@ public class DWPlayground extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        CharsetProviderService charsetProviderService = new CharsetProviderService() {
-			@Override
-			public Charset defaultCharset() {
-				return null;
-			}
-		};
-		weaveEngine = new WeaveExpressionLanguage(null, charsetProviderService);
+		weaveEngine = new WeaveExpressionLanguage(null, null);
 
         SplitPane splitPane = new SplitPane();
         AnchorPane inputPane = new AnchorPane();
