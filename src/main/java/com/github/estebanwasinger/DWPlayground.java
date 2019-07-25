@@ -79,7 +79,7 @@ public class DWPlayground extends Application {
 
     public static final Font MENLO_FONT = new Font("Menlo", 14);
     private WeaveExpressionLanguage weaveEngine;
-    private static Stage primaryStage;
+    private Stage primaryStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -114,7 +114,6 @@ public class DWPlayground extends Application {
         });
 
         ToolBar toolBar = new ToolBar(comboBox);
-
 
         inputVBox.getChildren().add(toolBar);
         Tab payloadTab = new Tab(PAYLOAD, inputVBox);
