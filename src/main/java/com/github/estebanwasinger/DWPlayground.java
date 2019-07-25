@@ -28,12 +28,14 @@ import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
 import org.mule.runtime.core.internal.el.DefaultBindingContextBuilder;
 import org.mule.weave.v2.el.WeaveExpressionLanguage;
+import org.mule.weave.v2.model.service.CharsetProviderService;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
@@ -87,7 +89,13 @@ public class DWPlayground extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        weaveEngine = new WeaveExpressionLanguage();
+        CharsetProviderService charsetProviderService = new CharsetProviderService() {
+			@Override
+			public Charset defaultCharset() {
+				return null;
+			}
+		};
+		weaveEngine = new WeaveExpressionLanguage(null, charsetProviderService);
 
         SplitPane splitPane = new SplitPane();
         AnchorPane inputPane = new AnchorPane();
