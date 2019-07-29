@@ -30,11 +30,10 @@ mvn exec:java -Dexec.mainClass="com.github.estebanwasinger.DWPlayground"
 
 ## How to generate a runnable jar to use directly
 
-* To generate runnable dataweave-playground-1.0-SNAPSHOT-runnable.jar, execute the following command:
+* To generate runnable runnable jar, execute the following command:
 
 ```
 mvn clean package
 ```
-
 * dataweave-playground-1.0-SNAPSHOT-runnable.jar will be generated under /target folder 
-* Directly run dataweave-playground-1.0-SNAPSHOT-runnable.jar and develop dataweave scripts
+* Directly run dataweave-playground-1.0-SNAPSHOT-runnable.jar to use dataweave playground
