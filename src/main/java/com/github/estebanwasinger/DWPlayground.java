@@ -87,7 +87,7 @@ public class DWPlayground extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        weaveEngine = new WeaveExpressionLanguage();
+		weaveEngine = new WeaveExpressionLanguage(null, WeaveExpressionLanguage.$lessinit$greater$default$2());
 
         SplitPane splitPane = new SplitPane();
         AnchorPane inputPane = new AnchorPane();
@@ -112,7 +112,6 @@ public class DWPlayground extends Application {
         });
 
         ToolBar toolBar = new ToolBar(comboBox);
-
 
         inputVBox.getChildren().add(toolBar);
         Tab payloadTab = new Tab(PAYLOAD, inputVBox);

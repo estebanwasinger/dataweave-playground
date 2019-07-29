@@ -24,7 +24,7 @@ public class DWPlaygroundConstants {
     public static final String DWP_EXT = "*.dwp";
     public static final String DWP_EXT_UPPER = "*.DWP";
 
-    public static final String BASE_TRANS = "%dw 2.0\n" +
+    public static final String BASE_TRANS = "%dw 2.2\n" +
             "output application/json\n" +
             "---\n" +
             "payload";
@@ -34,7 +34,7 @@ public class DWPlaygroundConstants {
     public static final String APPLICATION_JSON = "application/json";
     public static final String APPLICATION_XML = "application/xml";
     public static final String APPLICATION_CSV = "application/csv";
-    public static final String SAVE_DW = "%dw 2.0\n" +
+    public static final String SAVE_DW = "%dw 2.2\n" +
             "%output application/json\n" +
             "---\n" +
             "{\n" +
@@ -42,7 +42,7 @@ public class DWPlaygroundConstants {
             " transformation: write(transformation, \"application/java\")\n" +
             "}";
 
-    public static final String LOAD_DW = "%dw 2.0\n" +
+    public static final String LOAD_DW = "%dw 2.2\n" +
             "output application/java\n" +
             "---\n" +
             "payload";

@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.estebanwasinger</groupId>
-    <artifactId>weave-playground</artifactId>
+    <artifactId>dataweave-playground</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <mule-version>4.1.2</mule-version>
+        <mule-version>4.2.1</mule-version>
     </properties>
 
     <dependencies>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.mule.services</groupId>
             <artifactId>mule-service-weave</artifactId>
-            <version>2.1.3</version>
+            <version>2.2.1</version>
             <classifier>mule-service</classifier>
         </dependency>
 
@@ -42,28 +42,21 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.github.estebanwasinger.DWPlayground</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-maven-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>repackage</goal>
+			            </goals>
+			            <configuration>
+			                <classifier>runnable</classifier>
+			                <mainClass>com.github.estebanwasinger.DWPlayground</mainClass>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
