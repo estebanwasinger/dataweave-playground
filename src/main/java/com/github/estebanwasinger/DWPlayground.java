@@ -22,12 +22,17 @@ import static com.github.estebanwasinger.DWPlaygroundUtils.getInputDataType;
 import static com.github.estebanwasinger.DWPlaygroundUtils.getTypedValueStringValue;
 import static com.github.estebanwasinger.DWPlaygroundUtils.updateAppTitle;
 import static javafx.scene.layout.Priority.ALWAYS;
+import static org.mule.runtime.core.internal.util.rx.ImmediateScheduler.IMMEDIATE_SCHEDULER;
 
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.metadata.TypedValue;
+import org.mule.runtime.api.scheduler.Scheduler;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
 import org.mule.runtime.core.internal.el.DefaultBindingContextBuilder;
+import org.mule.weave.v2.el.MuleServiceLevelModuleManager;
 import org.mule.weave.v2.el.WeaveExpressionLanguage;
+import org.mule.weave.v2.model.service.CharsetProviderService;
+import org.mule.weave.v2.model.service.DefaultCharsetProviderService$;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,6 +63,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -87,7 +93,10 @@ public class DWPlayground extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        weaveEngine = new WeaveExpressionLanguage();
+        MuleServiceLevelModuleManager muleServiceLevelModuleManager = new MuleServiceLevelModuleManager();
+        Scheduler immediateScheduler = IMMEDIATE_SCHEDULER;
+        CharsetProviderService charsetProviderService = DefaultCharsetProviderService$.MODULE$;
+        weaveEngine = new WeaveExpressionLanguage(IMMEDIATE_SCHEDULER, charsetProviderService, muleServiceLevelModuleManager);
 
         SplitPane splitPane = new SplitPane();
         AnchorPane inputPane = new AnchorPane();
@@ -139,8 +148,34 @@ public class DWPlayground extends Application {
             evaluateAndUpdateUI(inputText, transformationText, outputTextArea, titledPane, comboBox.getValue());
             return null;
         }, 300);
-        EventHandler evaluateAndUpdateUIAction = event -> objectDebouncer.call("");
-        transformationText.setOnKeyReleased(evaluateAndUpdateUIAction);
+        EventHandler evaluateAndUpdateUIAction = event -> {
+            if (event instanceof KeyEvent) {
+                KeyEvent event1 = (KeyEvent) event;
+                int caretPosition = transformationText.getCaretPosition();
+
+                if (event1.getCharacter().equals("{")) {
+                    transformationText.insertText(caretPosition, "\n}");
+                }
+
+                if (event1.getCharacter().equals("[")) {
+                    transformationText.insertText(caretPosition, "]");
+                }
+
+                if (event1.getCharacter().equals("\"")) {
+                    char c = transformationText.getText().charAt(caretPosition - 2);
+                    if (c != '"') {
+                        transformationText.insertText(caretPosition, "\"");
+                    }
+                }
+
+
+                transformationText.positionCaret(caretPosition);
+
+            }
+
+            objectDebouncer.call("");
+        };
+        transformationText.setOnKeyTyped(evaluateAndUpdateUIAction);
         inputText.setOnKeyReleased(evaluateAndUpdateUIAction);
         comboBox.setOnAction(evaluateAndUpdateUIAction);
 
@@ -180,7 +215,6 @@ public class DWPlayground extends Application {
 
     private void initUI(TextArea inputText, ComboBox<String> comboBox, TextArea transformationText, TextArea outputTextArea, TitledPane titledPane) {
         inputText.setText(EXAMPLE);
-//        inputText.appendText(EXAMPLE);
         transformationText.setText(BASE_TRANS);
         evaluateAndUpdateUI(inputText, transformationText, outputTextArea, titledPane, comboBox.getValue());
     }
