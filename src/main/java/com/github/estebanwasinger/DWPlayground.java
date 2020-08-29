@@ -168,6 +168,14 @@ public class DWPlayground extends Application {
                     }
                 }
 
+//                if (!(event1.getCharacter().equals(",") || event1.getCharacter().equals(" "))) {
+//                DefaultWeaveResource defaultWeaveResource = new DefaultWeaveResource(null, transformationText.getText());
+//                final PhaseResult<ParsingResult<DocumentNode>> parse = MappingParser.parse(MappingParser.parsingPhase(), defaultWeaveResource, ParsingContextFactory.createParsingContext());
+//                final DocumentNode documentNode = parse.getResult().astNode();
+//                final String newCode = CodeGenerator$.MODULE$.generate(documentNode);
+//                transformationText.setText(newCode);
+//                }
+
 
                 transformationText.positionCaret(caretPosition);
 
