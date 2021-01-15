@@ -31,3 +31,5 @@ Is a tool for quick and easy development of DataWeave scripts
 To run the DataWeave Playground using maven, execute the following command:
 
 ```mvn exec:java -Dexec.mainClass="com.github.estebanwasinger.DWPlayground"```
+
+Disclaimer: It is not an officially supported MuleSoft Product. It is not supported by MuleSoft Support, you won't be able to open MuleSoft Support cases for this Suite and there are no SLAs for responses nor bug/features progress.
