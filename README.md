@@ -1,6 +1,6 @@
 # DataWeave Playground
 
-## For Online Playgroung please visit http://dwlang.fun/
+## For Online Playgroung please visit https://dataweavelang.org/
 
 
 
